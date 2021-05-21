@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="LoginPage.css"> 
+    <link rel="stylesheet" href="LoginPage.js">
+    <script src="LoginPage.js"></script>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="wrapper"> 
+      <div class="title">
+User Login  </div>
+<form action="#" method="" name="form" onsubmit="return validation(),LoginUser()">
+        <div class="field">
+          <input type="email" name="email" id="email" value="">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span id="messages" style="color: red; font-size: 11px;"></span>
+                    <label>Email Address</label>
+        </div><br>
+<div class="field">
+  <input id="pass" name="password" type="password" value="">
+  &nbsp;&nbsp;&nbsp;&nbsp;<span id="message" style="color: red; font-size: 11px;"></span>
+          <label>Password</label>
+          
+        </div><br>
+<div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
+          </div>
+<div class="pass-link">
+<a href="#">Forgot password?</a></div>
+</div>
+<div class="field">
+          <input type="submit" value="Login" name="submit" >
+        </div>
+<div class="signup-link">
+Not a member? <a href="register.html">Signup now</a></div>
+</form>
+</div>
+
+<!-------------------------------------------------------------------------------------------->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyA0q0WFD8jzjkGcgB5KlRW4qCkRSNkZ3zw",
+    authDomain: "monitask-26b33.firebaseapp.com",
+    projectId: "monitask-26b33",
+    storageBucket: "monitask-26b33.appspot.com",
+    messagingSenderId: "266316968222",
+    appId: "1:266316968222:web:98fd4c9cfed10dbc5fd90f",
+    measurementId: "G-T76YXDHB97"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  
+function LoginUser(){
+  var email=document.getElementById('email').value;
+  var password=document.getElementById('pass').value;
+  const a=firebase.auth().signInWithEmailAndPassword(email,password).then(function(){
+   var id=firebase.auth().currentUser.uid;
+   window.location.replace("Admin_Dashboard.html");
+   localStorage.setItem('id',id);
+   a.catch(e => alert(e.message));
+   	
+  }).catch(function(error){
+   var errorCode=error.code;
+   var errorMsg=error.message;
+  });
+ }
+</script>
+
+</body>
+</html>
